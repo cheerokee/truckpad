@@ -8928,7 +8928,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       production: false,
       api: {
         protocolo: 'http',
-        host: 'back.truckpad.ddns.net',
+        host: 'backtruckpad.ddns.net',
 
         get url() {
           return "".concat(this.protocolo, "://").concat(this.host, "/api");

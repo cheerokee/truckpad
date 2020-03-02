@@ -4768,7 +4768,7 @@ const environment = {
     production: false,
     api: {
         protocolo: 'http',
-        host: 'back.truckpad.ddns.net',
+        host: 'backtruckpad.ddns.net',
         get url() {
             return `${this.protocolo}://${this.host}/api`;
         }
