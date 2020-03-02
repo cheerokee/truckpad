@@ -15,7 +15,7 @@ export const environment = {
     },
     api: {
         protocolo: 'http',
-        host: 'truckpad.dev.br',
+        host: 'back.truckpad.ddns.net',
         get url() {
             return `${this.protocolo}://${this.host}/api`;
         }
