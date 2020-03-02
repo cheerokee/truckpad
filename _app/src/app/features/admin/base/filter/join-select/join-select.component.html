@@ -1,0 +1,6 @@
+<select class="form-control shadow-inset-2"
+        (change)="onChange()"
+        [(ngModel)]="item.value">
+    <option value="">Selecione...</option>
+    <option *ngFor="let option of list" [ngValue]="option.id">{{ option.text }}</option>
+</select>

@@ -1,0 +1,10 @@
+<div [formGroup]="form">
+    <textarea [id]="element.name"
+              type="text"
+              formControlName="{{ element.name }}"
+              (ngModelChange)="onChange()"
+              [(ngModel)]="value"
+              class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" ></textarea>
+</div>
+
+

@@ -1,0 +1,11 @@
+<base-listar [listView]="listView"
+             [filter]="filter"
+             [columns]="columns"
+             [list]="list"
+             (onDelete)="delete($event)"
+             (onFilter)="filtering($event)">
+    <base-pagination *ngIf="this.list !== undefined"
+                     class="pagination"
+                     [data]="this.list"
+                     (onPaginate)="paginate($event)" ></base-pagination>
+</base-listar>

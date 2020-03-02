@@ -1,0 +1,21 @@
+<div class="page-wrapper">
+  <div class="page-inner">
+    <smart-sidebar *ngIf="canShowNavBar()" class="d-flex flex-column flex-fill "></smart-sidebar>
+
+    <div class="page-content-wrapper">
+      <smart-page-header *ngIf="canShowNavBar()"></smart-page-header>
+
+      <main id="js-page-content" role="main" [ngClass]="{ 'd-flex justify-content-center' : inAuthRoute() }" class="page-content">
+        <smart-page-breadcrumb *ngIf="canShowNavBar()"></smart-page-breadcrumb>
+        <router-outlet></router-outlet>
+      </main>
+
+      <smart-page-footer *ngIf="canShowNavBar()" class="d-flex w-100 order-4 "></smart-page-footer>
+    </div>
+
+    <smart-fab-shortcut *ngIf="canShowNavBar()"></smart-fab-shortcut>
+
+    <!-- this overlay is activated only when mobile menu is triggered -->
+    <div *ngIf="canShowNavBar()" class="page-content-overlay" (click)="closeMobileNav($event)" data-class="mobile-nav-on"></div>
+  </div>
+</div>

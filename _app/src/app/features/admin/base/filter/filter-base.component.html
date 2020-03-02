@@ -1,0 +1,45 @@
+<div class="col-md-12 p-0">
+    <h5>
+        <i class="fal fa-filter"></i> Filtro
+    </h5>
+</div>
+<div *ngFor="let item of filter" class="col-md-{{ item.col }} m-0 p-0">
+    <div *ngIf="item.component == 'text'" class="input-group pr-2 row m-0 p-0">
+        <label>{{ item.titulo }}:</label>
+        <filter-text class="col-md-12 p-0"
+                     [item]="item"></filter-text>
+    </div>
+    <div *ngIf="item.component == 'text-area'" class="input-group pr-2 row m-0 p-0">
+        <label>{{ item.titulo }}:</label>
+        <filter-text-area class="col-md-12 p-0" [item]="item"></filter-text-area>
+    </div>
+    <div *ngIf="item.component == 'date'" class="input-group pr-2 row m-0 p-0">
+        <label>{{ item.titulo }}:</label>
+        <filter-date class="col-md-12 p-0" [item]="item"></filter-date>
+    </div>
+    <div *ngIf="item.component == 'select'" class="input-group pr-2 row m-0 p-0">
+        <label>{{ item.titulo }}:</label>
+        <filter-select class="col-md-12 p-0" [item]="item"></filter-select>
+    </div>
+    <div *ngIf="item.component == 'join-select'" class="input-group pr-2 row m-0 p-0">
+        <label>{{ item.titulo }}:</label>
+        <filter-join-select class="col-md-12 p-0" [item]="item"></filter-join-select>
+    </div>
+    <div *ngIf="item.component == 'join-autocomplete'"
+         class="input-group pr-2 row m-0 p-0">
+        <label>{{ item.titulo }}:</label>
+        <filter-join-autocomplete
+                class="col-md-12 p-0"
+                [item]="item"></filter-join-autocomplete>
+    </div>
+</div>
+<div class="col-md-12 m-0 p-0 pt-3 ">
+    <button (click)="filtering()"
+            class="btn btn-sm btn-primary waves-effect waves-themed mr-2">
+        Filtrar
+    </button>
+    <button *ngIf="cookieService.get(cookie_nome)"
+            (click)="clearFilter()" class="btn btn-sm btn-danger waves-effect waves-themed">
+        Cancelar Filtro
+    </button>
+</div>

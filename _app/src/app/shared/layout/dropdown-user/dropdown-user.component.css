@@ -1,0 +1,4 @@
+.header-icon:not(.btn)[data-toggle=dropdown] + .dropdown-menu{
+    right: initial !important;
+    margin-left: -20px;
+}

@@ -1,0 +1,43 @@
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class="subheader-icon fal fa-lock-alt"></i> Painel de Autorização
+    </h1>
+</div>
+<div class="panel">
+    <div class="panel-container show">
+        <div class="panel-content">
+            <ul class="nav nav-pills" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link"
+                       [ngClass]="{ 'active' : tab == 'panel-privilegio' }"
+                       data-toggle="tab"
+                       (click)="tabChange('panel-privilegio')"
+                       href="#panel-privilegio">
+                        <i class="fal fa-home mr-1"></i>Gerenciador de Privilégios
+                    </a>
+                </li>
+                <li *ngIf="isAdmin" class="nav-item">
+                    <a class="nav-link"
+                       [ngClass]="{ 'active' : tab == 'panel-possibilidade' }"
+                       data-toggle="tab"
+                       (click)="tabChange('panel-possibilidade')"
+                       href="#panel-possibilidade">
+                        <i class="fal fa-user mr-1"></i>Gerenciador de Possibilidades
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content py-3">
+                <hr />
+                <panel-privilegio class="tab-pane fade"
+                                  [ngClass]="{ 'show active' : tab == 'panel-privilegio' }"
+                                  [id]="'panel-privilegio'"
+                                  role="tabpanel"></panel-privilegio>
+                <panel-possibilidade class="tab-pane fade"
+                                     *ngIf="isAdmin"
+                                     [ngClass]="{ 'show active' : tab == 'panel-possibilidade' }"
+                                     [id]="'panel-possibilidade'"
+                                     role="tabpanel"></panel-possibilidade>
+            </div>
+        </div>
+    </div>
+</div>

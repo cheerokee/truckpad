@@ -1,0 +1,94 @@
+<section>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-8 col-lg-5 p-4 panel">
+                <header class="text-center mb-4">
+                    <h2 class="h2 g-color-black g-font-weight-600">
+                        <i class="fal fa-lock-alt"></i>&nbsp;&nbsp;Área Restrita
+                    </h2>
+                </header>
+                <div *ngIf="showMessageError" >
+                    <alert-error [(show)]="showMessageError">Credenciais Inválidas</alert-error>
+                </div>
+                <alert-error [(show)]="btnReenvio">
+                    Reenvie o e-mail para confirmação
+                </alert-error>
+                <div *ngIf="btnReenvio" class="mb-4 d-flex justify-content-center">
+
+                    <button type="button"
+                            (click)="ReenviarConfirmacao()"
+                            class="btn btn-lg btn-danger" >
+                        <i class="fal fa-envelope"></i>&nbsp;Reenviar
+                    </button>
+                </div>
+                <form class="form-signin form-validate g-py-15" (submit)="submit()">
+                    <div [formGroup]="form" class="mb-4">
+                        <label [for]="'email'"
+                               class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
+                            Email:
+                        </label>
+                        <input [id]="'email'"
+                               type="email"
+                               formControlName="email"
+                               class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+                               placeholder="Digite o e-mail" autofocus>
+                        <field-error [field]="form.get('email')"
+                                     [label]="'E-mail'"
+                                     [messages]="[]"></field-error>
+                    </div>
+                    <div [formGroup]="form" class="g-mb-35">
+                        <label [for]="'senha'"
+                               class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
+                            Password:
+                        </label>
+                        <input [id]="'senha'"
+                               type="password"
+                               formControlName="senha"
+                               class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+                               placeholder="Digite a Senha" autofocus>
+                        <field-error [field]="form.get('senha')"
+                                     [label]="'Senha'"
+                                     [messages]="[]"></field-error>
+
+                        <div class="row justify-content-between">
+                            <div class="col align-self-center">
+
+                            </div>
+                            <div class="col align-self-center text-right">
+                                <a [routerLink]="['/forgot']" class="g-font-size-12">
+                                    Esqueceu a senha?
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4 mt-4 d-flex justify-content-center">
+                        <button type="submit"
+                                id="entrar"
+                                [hidden]="!btnEntrar"
+                                [disabled]="!form.valid"
+                                class="btn btn-lg btn-primary waves-effect waves-themed">
+                            Entrar
+                        </button>
+                        <button class="btn btn-lg btn-danger waves-effect waves-themed"
+                                type="button"
+                                [hidden]="btnEntrar"
+                                disabled="">
+                            <span class="spinner-grow spinner-grow-sm"
+                                  role="status"
+                                  aria-hidden="true"></span>
+                            Aguarde...
+                        </button>
+                    </div>
+                </form>
+                <footer class="text-center">
+                    <p class="g-color-gray-dark-v5 g-font-size-13 mb-0">
+                        Ainda não está cadastrado?
+                        <a [routerLink]="['/register']" class="g-font-weight-600">
+                            Cadastre-se
+                        </a>
+                    </p>
+                </footer>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,139 @@
+<form id="form-panel-possibilidade" (ngSubmit)="save()"></form>
+<div class="row mt-5 mb-5">
+    <div class="col-md-10 offset-1 card bg-gray-50 pt-2">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Gerenciador de Possibilidades</h3>
+                <p class="text-justify">
+                    Devemos definir o que podemos fazer com cada recurso,
+                    geramente cada recurso tem suas possibilidades definidas automaticamente quando o usuário
+                    se depara com a verificação de permissão.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div [formGroup]="form" class="col-md-12 form-group">
+                <label class="form-label mb-3">Selecione o Recurso</label>
+                <div class="row">
+                    <div *ngFor="let recurso of recursos?._embedded.recurso"
+                         class="col-md-3 mb-3">
+                        <button type="button"
+                                (click)="selecionaRecurso(recurso.id)"
+                                class="form-control btn btn-primary waves-effect waves-themed">
+                            {{ recurso.nome }}
+                            <span *ngIf="recurso.id == form.get('recurso').value"
+                                  class="badge bg-primary-500 ml-2">
+                        <i class="fal fa-check"></i>
+                    </span>
+                        </button>
+                    </div>
+                </div>
+                <input type="text"
+                       class="d-none"
+                       form="form-panel-possibilidade"
+                       [id]="'recurso'"
+                       formControlName="recurso" />
+                <field-error [field]="form.get('recurso')"
+                             [label]="'Recurso'"
+                             [messages]="[]"></field-error>
+            </div>
+            <div [formGroup]="form" class="col-md-3 form-group">
+                <label [for]="'acao'" class="form-label mb-3">Escolha a Ação</label>
+                <select [id]="'acao'"
+                        formControlName="acao"
+                        form="form-panel-possibilidade"
+                        class="form-control form-control">
+                    <option [ngValue]="null" >Selecione...</option>
+                    <option *ngFor="let acao of acoes" [ngValue]="acao?.id">{{ acao?.nome }}</option>
+                </select>
+                <field-error [field]="form?.get('acao')"
+                             [label]="'Ação'"
+                             [messages]="[]"></field-error>
+            </div>
+            <div class="col-md-9 form-group">
+                <label class="form-label mb-3">&nbsp;</label>
+                <div class="input-group">
+
+                    <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fal fa-search"></i>
+                </span>
+                    </div>
+                    <input type="text"
+                           class="form-control form-control"
+                           (keyup)="search()"
+                           [(ngModel)]="recurso_search"
+                           placeholder="Pesquise o Recurso">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="panel-toolbar border-top pt-3 pb-3">
+                    <button type="submit"
+                            form="form-panel-possibilidade"
+                            id="entrar"
+                            [hidden]="!btnSalvar"
+                            [disabled]="!form.valid"
+                            title="SALVAR"
+                            class="btn btn-sm btn-primary waves-effect waves-themed">
+                        <i class="fal fa-save"></i>&nbsp;Salvar
+                    </button>
+                    <button class="btn btn-sm btn-danger waves-effect waves-themed"
+                            type="button"
+                            [hidden]="btnSalvar"
+                            disabled="">
+                            <span class="spinner-grow spinner-grow-sm"
+                                  role="status"
+                                  aria-hidden="true"></span>
+                        Aguarde...
+                    </button>
+                    <button type="button"
+                            title="CANCELAR"
+                            (click)="resetGeral()"
+                            class="ml-2 btn btn-sm btn-danger waves-effect waves-themed">
+                        <i class="fal fa-times"></i>&nbsp;Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr >
+<div class="row mt-4">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Recurso</th>
+                <th>Possibilidades</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let possibilidade of possibilidades">
+                <td>{{ possibilidade.recurso_nome }}</td>
+                <td>
+                    <button *ngFor="let acao of possibilidade.acoes"
+                            type="button"
+                            [swal]="deleteSwal"
+                            (click)="del({acao: acao.id,recurso: possibilidade.recurso_id})"
+                            class="btn btn-xs btn-secondary waves-effect waves-themed m-1">
+                        {{ acao.nome }} <i class="fal fa-times"></i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<swal #deleteSwal
+      title="Deseja deletar o registro?"
+      text="Essa ação é irreversível"
+      icon="question"
+      [showCancelButton]="true"
+      [focusCancel]="true"
+      [confirmButtonText]="'Sim'"
+      [cancelButtonText]="'Não'"
+      (confirm)="delete($event)" (cancel)="cancel($event)">
+</swal>
+
+
+

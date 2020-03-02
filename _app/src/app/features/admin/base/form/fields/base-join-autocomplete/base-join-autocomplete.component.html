@@ -1,0 +1,18 @@
+<div [formGroup]="form" >
+    <input type="hidden"
+           [attr.id]=""
+           formControlName="{{ element.name }}"
+           [(ngModel)]="value" />
+</div>
+<input [attr.list]="element.name"
+       [(ngModel)]="optionSelected"
+       (keyup)="search()"
+       (change)="onChange()"
+       (blur)="onChange()"
+       class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+       placeholder="{{ placeholder }}"/>
+<datalist [attr.id]="element.name">
+    <option *ngFor="let option of element.options"
+            data-id="{{ option.id }}"
+            value="{{ option.text }}"></option>
+</datalist>

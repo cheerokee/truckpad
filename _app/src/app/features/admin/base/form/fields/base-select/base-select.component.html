@@ -1,0 +1,12 @@
+<div [formGroup]="form">
+    <select [id]="element.name"
+           formControlName="{{ element.name }}"
+           (change)="onChange()"
+           [(ngModel)]="value"
+           class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15">
+        <option [ngValue]="null" >Selecione...</option>
+        <option *ngFor="let option of element.options" [ngValue]="option.id">
+            {{ option.text }}
+        </option>
+    </select>
+</div>

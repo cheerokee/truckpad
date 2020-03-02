@@ -1,0 +1,57 @@
+<div dropdown>
+  <a id="button-basic" class="header-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown-basic">
+    <i class="fal fa-cube"></i>
+  </a>
+  <div id="dropdown-basic" class="dropdown-menu dropdown-menu-animated-center w-auto h-auto"
+    role="menu" aria-labelledby="button-basic" >
+    <div class="dropdown-header bg-trans-gradient d-flex justify-content-center align-items-center rounded-top">
+      <h4 class="m-0 text-center color-white">
+        Atalho
+        <small class="mb-0 opacity-80">Ferramentas & Aplicações</small>
+      </h4>
+    </div>
+    <div class="custom-scroll h-100">
+      <ul class="app-list">
+        <li>
+          <a  [routerLink]="['/admin/perfil-panel']" class="app-list-item hover-white">
+            <span class="icon-stack">
+              <i class="base-2 icon-stack-3x color-primary-400"></i>
+              <i class="base-10 text-white icon-stack-1x"></i>
+              <i class="ni md-profile color-primary-800 icon-stack-2x"></i>
+            </span>
+            <span class="app-list-name">
+              Minha Conta
+            </span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/admin/paciente']" class="app-list-item hover-white">
+    
+            <span class="icon-stack">
+              <i class="base-9 icon-stack-3x color-success-400"></i>
+              <i class="base-2 icon-stack-2x color-success-500"></i>
+              <i class="ni ni-users icon-stack-1x text-white"></i>
+            </span>
+    
+            <span class="app-list-name">
+              Pacientes
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="app-list-item hover-white">
+            <span class="icon-stack">
+              <i class="base-2 icon-stack-3x color-primary-600"></i>
+              <i class="base-3 icon-stack-2x color-primary-700"></i>
+              <i class="ni ni-settings icon-stack-1x text-white fs-lg"></i>
+            </span>
+            <span class="app-list-name">
+              Contas
+            </span>
+          </a>
+        </li>
+      </ul>	
+    </div>
+    
+  </div>
+</div>

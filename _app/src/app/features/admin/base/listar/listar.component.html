@@ -1,0 +1,97 @@
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class="subheader-icon {{ listView.icon }}"></i> {{ listView.title }}
+    </h1>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div id="panel-2" class="panel">
+            <div class="panel-hdr row ml-0 mr-0 pt-3 pb-3">
+                <div class="col-md-12">
+                    <button title="Novo Registro"
+                            *ngIf="listView.novo.show"
+                            [routerLink]="[listView.novo.url]"
+                            class="btn btn-success btn-lg btn-icon rounded-circle waves-effect waves-themed mr-2">
+                        <i class="fal fa-plus"></i>
+                    </button>
+                    <button title="Imprimir" class="btn btn-primary btn-lg btn-icon rounded-circle waves-effect waves-themed mr-2">
+                        <i class="fal fa-print"></i>
+                    </button>
+                </div>
+            </div>
+            <filter-base class="row panel-hdr m-0 p-3"
+                         [filter]="filter"
+                         [nome_recurso]="'sala-espera'"
+                         (onFilter)="filtering($event)"></filter-base>
+            <div class="panel-container collapse show" style="">
+                <div class="panel-content table-responsive" >
+                    <table class="table table-bordered table-hover table-striped w-100 dataTable dtr-inline">
+                        <thead>
+                            <tr>
+                                <th *ngFor="let column of columns">{{ column.titulo }}</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="list">
+                            <tr *ngFor="let obj of list._embedded[listView.controller.replace('-','_')]">
+                                <td *ngFor="let column of columns">
+                                    <!-- COLUNA TIPO SIMPLES -->
+                                    <div *ngIf="!column.tipo && obj[column.campo]" [innerHTML]="obj[column.campo]"></div>
+                                    <!-- COLUNA TIPO JOIN -->
+                                    <div *ngIf="column.tipo == 'join' && obj._embedded !== undefined && obj._embedded[column.campo]"
+                                         [innerHTML]="obj._embedded[column.campo][column.attr]"></div>
+                                    <!-- COLUNA TIPO SELECT -->
+                                    <div *ngIf="column.tipo == 'select'"
+                                         [innerHTML]="obj[column.campo] | labelsToString: column.labels"></div>
+                                    <!-- COLUNA TIPO Date -->
+                                    <div *ngIf="column.tipo == 'date'"
+                                         [innerHTML]="obj[column.campo].date | date: 'dd/MM/yyyy'"></div>
+                                </td>
+                                <td>
+                                    <button title="Visualizar"
+                                            *ngIf="listView.visualizar.show"
+                                            class="btn btn-primary btn-icon rounded-circle waves-effect waves-themed mr-2"
+                                            [routerLink]="[listView.visualizar.url]">
+                                        <i class="fal fa-eye"></i>
+                                    </button>
+                                    <button title="Editar"
+                                            *ngIf="listView.editar.show"
+                                            class="btn btn-success btn-icon rounded-circle waves-effect waves-themed mr-2"
+                                            [routerLink]="[listView.editar.url+'/'+obj.id]">
+                                        <i class="fal fa-edit"></i>
+                                    </button>
+                                    <button title="Deletar"
+                                            *ngIf="listView.deletar"
+                                            [swal]="deleteSwal"
+                                            (click)="del(obj.id)"
+                                            class="btn btn-danger btn-icon rounded-circle waves-effect waves-themed mr-2">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                    <ng-content select=".listButton"></ng-content>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ng-content select=".corpo"></ng-content>
+                </div>
+                <div class="row p-3">
+                    <div class="col-md-6">
+                        <ng-content select=".pagination"></ng-content>
+                    </div>
+                    <div class="col-md-6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<swal #deleteSwal
+    title="Deseja deletar o registro?"
+    text="Essa ação é irreversível"
+    icon="question"
+    [showCancelButton]="true"
+    [focusCancel]="true"
+    [confirmButtonText]="'Sim'"
+    [cancelButtonText]="'Não'"
+    (confirm)="delete($event)" (cancel)="cancel($event)">
+</swal>
+

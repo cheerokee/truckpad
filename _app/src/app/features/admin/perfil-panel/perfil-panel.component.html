@@ -1,0 +1,282 @@
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class="subheader-icon fal fa-plus-circle"></i> Detalhes do Perfil
+    </h1>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-g rounded-top">
+            <div class="row no-gutters row-grid">
+                <div class="col-12">
+                    <div class="d-flex flex-column align-items-center justify-content-center p-4">
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3">
+                                <img src="{{ foto }}" class="rounded-circle shadow-2 img-thumbnail" alt="">
+                                <div align="center">
+                                    <button title="Editar Foto"
+                                            style="margin-top: -20px"
+                                            (click)="openChoose()"
+                                            class="btn btn-primary btn-xs btn-icon rounded-circle waves-effect waves-themed">
+                                        <i class="fal fa-edit"></i>
+                                    </button>
+                                </div>
+
+                                <input type="file"
+                                       id="image_input"
+                                       class="d-none"
+                                       (change)="fileChangeEvent($event)" />
+
+                                <div class="modal fade"
+                                     id="cropImage"
+                                     tabindex="-1"
+                                     role="dialog"
+                                     data-backdrop="static"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" >
+                                                    Recorte a Imagem
+                                                </h5>
+                                                <button type="button"
+                                                        class="close"
+                                                        data-dismiss="modal"
+                                                        aria-label="Fechar">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <image-cropper  [imageChangedEvent]="imageChangedEvent"
+                                                                [maintainAspectRatio]="true"
+                                                                [aspectRatio]="1 / 1"
+                                                                [resizeToWidth]="500"
+                                                                format="png"
+                                                                (imageCropped)="imageCropped($event)"
+                                                                (imageLoaded)="imageLoaded()"
+                                                                (cropperReady)="cropperReady()"
+                                                                (loadImageFailed)="loadImageFailed()" >
+                                                </image-cropper>
+                                                <img class="d-none" [src]="croppedImage" />
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button"
+                                                        class="btn btn-secondary"
+                                                        data-dismiss="modal">
+                                                    Fechar
+                                                </button>
+                                                <button type="button"
+                                                        (click)="recortar()"
+                                                        class="btn btn-primary">
+                                                    Recortar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 class="mb-0 fw-700 text-center mt-3">
+                            {{ usuario?.nome }}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mg-g rounded-top">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="nav flex-column nav-pills"
+                         id="v-pills-tab"
+                         role="tablist"
+                         aria-orientation="vertical">
+                        <a class="nav-link active"
+                           id="v-pills-geral-tab"
+                           data-toggle="pill"
+                           href="#v-pills-geral"
+                           role="tab"
+                           aria-controls="v-pills-geral"
+                           (click)="changeNav('geral')"
+                           aria-selected="false">
+                            <h4 class="m-0 p-0 font-weight-bold">
+                                <i class="fal fa-home"></i>
+                                <span class="hidden-sm-down ml-1">
+                                    Geral
+                                </span>
+                            </h4>
+                        </a>
+                        <a class="nav-link"
+                           id="v-pills-change-password-tab"
+                           data-toggle="pill"
+                           href="#v-pills-change-password"
+                           role="tab"
+                           aria-controls="v-pills-change-password"
+                           (click)="changeNav('trocaSenha')"
+                           aria-selected="false">
+                            <h4 class="m-0 p-0 font-weight-bold">
+                                <i class="fal fa-exchange-alt"></i>
+                                <span class="hidden-sm-down ml-1">
+                                    Trocar Senha
+                                </span>
+                            </h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 card mg-g rounded-top p-4">
+        <div class="tab-content "
+             id="v-pills-tabContent">
+            <div class="tab-pane fade active show"
+                 id="v-pills-geral"
+                 role="tabpanel"
+                 aria-labelledby="v-pills-geral-tab">
+                <h3 class="font-weight-bold">
+                    Dados Gerais
+                </h3>
+                <form *ngIf="nav == 'geral'" class="form-signin form-validate g-py-15" (submit)="submitGeral()">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div [formGroup]="form" class="mb-4">
+                                <label [for]="'nome'" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
+                                    Nome: *
+                                </label>
+                                <input [id]="'nome'"
+                                       type="text"
+                                       formControlName="nome"
+                                       class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+                                       placeholder="Seu nome completo" required autofocus>
+                                <field-error [field]="form?.get('nome')"
+                                             [label]="'Nome'"
+                                             [messages]="[]"></field-error>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div [formGroup]="form" class="mb-4">
+                                <label [for]="'email'" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
+                                    E-mail: *
+                                </label>
+                                <input [id]="'email'"
+                                       type="text"
+                                       formControlName="email"
+                                       class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+                                       placeholder="Digite seu e-mail" required autofocus>
+                                <field-error [field]="form?.get('email')"
+                                             [label]="'E-mail'"
+                                             [messages]="[]"></field-error>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div [formGroup]="form" class="mb-4">
+                                <label [for]="'telefone'"
+                                       class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
+                                    Telefone: *
+                                </label>
+                                <input [id]="'telefone'"
+                                       type="text"
+                                       (keydown)="functions.KeyTel(form,'telefone')"
+                                       formControlName="telefone"
+                                       class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+                                       placeholder="Digite o Telefone" required autofocus>
+                                <field-error [field]="form?.get('telefone')"
+                                             [label]="'Telefone'"
+                                             [messages]="[]"></field-error>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <button class="btn btn-lg btn-danger waves-effect waves-themed"
+                                    type="button"
+                                    [hidden]="btnGeral"
+                                    disabled="">
+                            <span class="spinner-grow spinner-grow-sm"
+                                  role="status"
+                                  aria-hidden="true"></span>
+                                Aguarde...
+                            </button>
+                            <button type="submit"
+                                    [hidden]="!btnGeral"
+                                    [disabled]="!form.valid"
+                                    class="btn btn-lg btn-primary waves-effect waves-themed">
+                                <i class="fal fa-save"></i>&nbsp;Salvar
+                            </button>
+                            <button type="button"
+                                    (click)="resetGeral()"
+                                    class="ml-2 btn btn-lg btn-danger waves-effect waves-themed">
+                                <i class="fal fa-times"></i>&nbsp;Cancelar Edição
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade"
+                 id="v-pills-change-password"
+                 role="tabpanel"
+                 aria-labelledby="v-pills-change-password-tab">
+                <h3 class="font-weight-bold">
+                    Trocar a Senha
+                </h3>
+                <form *ngIf="nav == 'trocaSenha'"
+                      class="form-signin form-validate g-py-15"
+                      (submit)="submitTrocaSenha()">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div [formGroup]="form" class="mb-4">
+                                <label [for]="'senha'" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
+                                    Senha: *
+                                </label>
+                                <input [id]="'senha'"
+                                       type="password"
+                                       formControlName="senha"
+                                       class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+                                       placeholder="Digite uma senha" required autofocus>
+                                <field-error [field]="form?.get('senha')"
+                                             [label]="'Senha'"
+                                             [messages]="[]"></field-error>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div [formGroup]="form" class="mb-4">
+                                <label [for]="'confirma'" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
+                                    Confirme a Senha: *
+                                </label>
+                                <input [id]="'confirma'"
+                                       type="password"
+                                       formControlName="confirma"
+                                       class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+                                       placeholder="Confirme sua senha" required autofocus>
+                                <field-error [field]="form?.get('confirma')"
+                                             [label]="'Confirmação'"
+                                             [messages]="[]"></field-error>
+                                <p *ngIf="form.get('senha').value != form.get('confirma').value" class="invalid-feedback d-block">
+                                    A senha e a confirmação não coincidem
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <button class="btn btn-lg btn-danger waves-effect waves-themed"
+                                    type="button"
+                                    [hidden]="btnTrocaSenha"
+                                    disabled="">
+                            <span class="spinner-grow spinner-grow-sm"
+                                  role="status"
+                                  aria-hidden="true"></span>
+                                Aguarde...
+                            </button>
+                            <button type="submit"
+                                    [hidden]="!btnTrocaSenha"
+                                    [disabled]="!form.valid || (form?.get('senha').value != form?.get('confirma').value)"
+                                    class="btn btn-lg btn-primary waves-effect waves-themed">
+                                <i class="fal fa-save"></i>&nbsp;Salvar
+                            </button>
+                            <button type="button"
+                                    (click)="resetTrocaSenha()"
+                                    class="ml-2 btn btn-lg btn-danger waves-effect waves-themed">
+                                <i class="fal fa-times"></i>&nbsp;Cancelar Edição
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

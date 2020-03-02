@@ -1,0 +1,19 @@
+<nav class="shortcut-menu hidden-sm-down">
+  <input type="checkbox" class="menu-open" name="menu-open" id="menu_open"/>
+  <label for="menu_open" class="menu-open-button ">
+    <span class="app-shortcut-icon d-block"></span>
+  </label>
+  <a href="#" class="menu-item btn" (click)="scrollTop($event)" placement="left" tooltip="Scroll Top">
+    <i class="fal fa-arrow-up"></i>
+  </a>
+  <a href="page_login-alt.html" class="menu-item btn" (click)="logout($event)" placement="left" data-placement="top" data-toogle="tooltip" title data-original-title="Tooltip success background">
+    <i class="fal fa-sign-out"></i>
+  </a>
+  <a href="#" class="menu-item btn" data-action="app-fullscreen" (click)="fullScreen($event)" placement="left" tooltip="Full Screen">
+    <i class="fal fa-expand"></i>
+  </a>
+  <a href="#" class="menu-item btn" data-action="app-print" (click)="printPage($event)" placement="left" tooltip="Print page">
+    <i class="fal fa-print"></i>
+  </a>
+</nav>
+  

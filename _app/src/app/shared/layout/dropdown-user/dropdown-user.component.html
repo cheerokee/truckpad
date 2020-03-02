@@ -1,0 +1,34 @@
+<div dropdown>
+  <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{usuario?.email}}"
+     class="header-icon d-flex align-items-center justify-content-center ml-2">
+    <img src="{{ foto }}" class="cursor-pointer profile-image rounded-circle" alt="{{usuario?.nome}}">
+  </a>
+  <div class="dropdown-menu dropdown-menu-animated-right dropdown-lg">
+    <div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
+      <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
+        <span class="mr-2">
+          <img src="{{ foto }}"
+               class="rounded-circle profile-image"
+               alt="{{ usuario?.nome }}">
+        </span>
+        <div class="info-card-text">
+          <div class="fs-lg text-truncate text-truncate-lg">{{usuario?.nome}}</div>
+          <span class="text-truncate text-truncate-md opacity-80">{{usuario?.email}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="dropdown-divider m-0"></div>
+    <a [routerLink]="['/admin/perfil-panel']" class="dropdown-item" data-action="app-reset">
+      <span >Detalhes do Perfil</span>
+    </a>
+    <div class="dropdown-divider m-0"></div>
+    <a href="#" class="dropdown-item" data-action="app-fullscreen">
+      <span >Maximizar a Tela</span>
+      <i class="float-right text-muted fw-n">F11</i>
+    </a>
+    <div class="dropdown-divider m-0"></div>
+    <a class="dropdown-item fw-500 pt-3 pb-3" (click)="deslogar()">
+      <span >Deslogar</span>
+    </a>
+  </div>
+</div>

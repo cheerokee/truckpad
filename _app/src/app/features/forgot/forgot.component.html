@@ -1,0 +1,61 @@
+<section>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-8 col-lg-5 p-4 panel">
+          <header class="text-center mb-4">
+            <h2 class="h2 g-color-black g-font-weight-600">
+              Recuperação de Senha
+            </h2>
+            <p>
+              Não se preocupe, receba no seu e-mail o link para a troca de senha.
+            </p>
+          </header>
+          <div *ngIf="showMessageError" >
+            <alert-error [(show)]="showMessageError">E-mail não existe na base de dados</alert-error>
+          </div>
+          <form class="form-signin form-validate g-py-15" (submit)="submit()">
+            <div [formGroup]="form" class="mb-4">
+              <label [for]="'email'" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
+                Email:
+              </label>
+              <input [id]="'email'"
+                     type="email"
+                     formControlName="email"
+                     class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+                     placeholder="Digite o e-mail" autofocus>
+              <field-error [field]="form.get('email')"
+                           [label]="'E-mail'"
+                           [messages]="[]"></field-error>
+              <div class="row justify-content-between">
+                <div class="col align-self-center text-right pt-2">
+                  <a [routerLink]="['/auth']" class="g-font-size-12">
+                    Possuo a senha, fazer o Login!
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="mb-4 mt-4 d-flex justify-content-center">
+              <button type="submit"
+                      id="forgot"
+                      [hidden]="!btnRecupera"
+                      [disabled]="!form.valid"
+                      class="btn btn-lg btn-primary waves-effect waves-themed">
+                Recuperar Senha
+              </button>
+              <button class="btn btn-lg btn-danger waves-effect waves-themed"
+                      type="button"
+                      [hidden]="btnRecupera"
+                      disabled="">
+                            <span class="spinner-grow spinner-grow-sm"
+                                  role="status"
+                                  aria-hidden="true"></span>
+                Aguarde...
+              </button>
+            </div>
+          </form>
+          <footer class="text-center">
+          </footer>
+      </div>
+    </div>
+  </div>
+</section>

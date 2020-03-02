@@ -1,0 +1,121 @@
+<section>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-8 col-lg-5 p-4 panel">
+                <header class="text-center mb-3">
+                    <h2 class="h2 g-color-black g-font-weight-600">
+                        Faça o Cadastro
+                    </h2>
+                </header>
+                <form class="form-signin form-validate g-py-15" (submit)="submit()">
+                    <div [formGroup]="form" class="mb-4">
+                        <label [for]="'nome'" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
+                            {{ ( form.get('tipo_pessoa') && form.get('tipo_pessoa')?.value ) ? "Nome Fantasia" : "Nome Completo" }}:
+                        </label>
+                        <input [id]="'nome'"
+                               type="text"
+                               formControlName="nome"
+                               class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+                               placeholder="Seu nome completo" required autofocus>
+                        <field-error [field]="'nome'"
+                                     [label]="'Nome Completo'"
+                                     [messages]="[]"></field-error>
+                    </div>
+                    <div [formGroup]="form" class="mb-4">
+                        <label [for]="'email'" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
+                            E-mail:
+                        </label>
+                        <input [id]="'email'"
+                               type="email"
+                               formControlName="email"
+                               class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+                               placeholder="Digite o e-mail" autofocus>
+                        <field-error [field]="'email'"
+                                     [label]="'E-mail'"
+                                     [messages]="[]"></field-error>
+                    </div>
+                    <div [formGroup]="form" class="mb-4">
+                        <label [for]="'telefone'" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
+                            Celular:
+                        </label>
+                        <input [id]="'telefone'"
+                               formControlName="telefone"
+                               type="text"
+                               class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15"
+                               placeholder="Digite o Telefone"
+                               (keydown)="functions.KeyTel(form,'telefone')">
+
+                        <field-error [field]="'telefone'"
+                                     [label]="'Celular'"
+                                     [messages]="[]"></field-error>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div [formGroup]="form" class="g-mb-35">
+                                <label [for]="'senha'" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
+                                    Senha:
+                                </label>
+                                <input [id]="'senha'"
+                                       formControlName="senha"
+                                       type="password"
+                                       data-msg="Por favor entre com a senha"
+                                       class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15 mb-3"
+                                       placeholder="Digite sua senha">
+                                <field-error [field]="'senha'"
+                                             [label]="'senha'"
+                                             [messages]="[]"></field-error>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div [formGroup]="form" class="g-mb-35">
+                                <label [for]="'confirma'" class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
+                                    Confirme a senha:
+                                </label>
+                                <input [id]="'confirma'"
+                                       formControlName="confirma"
+                                       type="password"
+                                       data-msg="Por favor entre com a senha"
+                                       class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15 mb-3"
+                                       placeholder="Confirme sua senha">
+                                <field-error [field]="'confirma'"
+                                             [label]="'Confirmação'"
+                                             [messages]="[]"></field-error>
+                                <p *ngIf="form.get('senha').value != form.get('confirma').value" class="invalid-feedback d-block">
+                                    A senha e a confirmação não coincidem
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4 mt-4 d-flex justify-content-center">
+                        <button class="btn btn-lg btn-danger waves-effect waves-themed"
+                                type="button"
+                                [hidden]="btnCadastro"
+                                disabled="">
+                            <span class="spinner-grow spinner-grow-sm"
+                                  role="status"
+                                  aria-hidden="true"></span>
+                            Aguarde...
+                        </button>
+                        <button type="submit"
+                                [hidden]="!btnCadastro"
+                                [disabled]="!form.valid"
+                                class="btn btn-lg btn-primary waves-effect waves-themed">
+                            Cadastrar
+                        </button>
+                    </div>
+                </form>
+                <footer class="text-center">
+                    <p class="g-color-gray-dark-v5 g-font-size-13 mb-0">
+                        Possuo uma conta,
+                        <a [routerLink]="['/auth']" class="g-font-weight-600">
+                            efetuar o login
+                        </a>
+                    </p>
+                </footer>
+            </div>
+        </div>
+    </div>
+</section>
+
+

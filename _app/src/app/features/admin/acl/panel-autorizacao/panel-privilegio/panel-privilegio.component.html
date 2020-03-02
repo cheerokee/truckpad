@@ -1,0 +1,98 @@
+<div class="row mt-5 mb-5">
+    <div class="col-md-10 offset-1 card bg-gray-50 pt-2">
+        <div class="row">
+            <div class="col-md-12 pt-2">
+                <h4 class="font-weight-bold text-primary">
+                    FAÇA O FILTRO
+                </h4>
+                <hr />
+            </div>
+            <div *ngIf="isAdmin" [formGroup]="form" class="col-md-3 form-group">
+                <label [for]="'clinica'" class="form-label">Escolha a Clínica</label>
+                <base-join-autocomplete [form]="form"
+                                        [element]="element_clinica"
+                                        (onValue)="changeClinica(element_clinica,$event)"
+                                        (onSearch)="search($event)"></base-join-autocomplete>
+                <field-error [field]="form?.get('clinica')"
+                             [label]="'Clinica'"
+                             [messages]="[]"></field-error>
+            </div>
+            <div [formGroup]="form" class="col-md-3 form-group">
+                <label [for]="'perfil'" class="form-label">Escolha o Perfil</label>
+                <base-select (onValue)="changePerfil(element_perfil,$event)"
+                             [element]="element_perfil"
+                             [form]="form"></base-select>
+                <field-error [field]="form?.get('perfil')"
+                             [label]="'Perfil'"
+                             [messages]="[]"></field-error>
+            </div>
+            <div [formGroup]="form" class="col-md-3 form-group">
+                <label [for]="'recurso'" class="form-label">Escolha o Recurso</label>
+                <base-select (onValue)="changeRecurso(element_recurso,$event)"
+                             [element]="element_recurso"
+                             [form]="form"></base-select>
+                <field-error [field]="form?.get('recurso')"
+                             [label]="'Recurso'"
+                             [messages]="[]"></field-error>
+            </div>
+            <div [formGroup]="form" class="col-md-3 form-group">
+                <label [for]="'acao'" class="form-label">Escolha a Ação</label>
+                <base-select *ngIf="form.get('recurso').value !== null"
+                             (onValue)="filter(element_acao,$event)"
+                             [element]="element_acao"
+                             [form]="form"></base-select>
+                <p *ngIf="form.get('recurso').value == null"
+                   class="alert alert-warning p-2">
+                    Selecione o recurso primeiro
+                </p>
+                <field-error [field]="form?.get('acao')"
+                             [label]="'Ação'"
+                             [messages]="[]"></field-error>
+            </div>
+        </div>
+    </div>
+</div>
+<hr >
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h4 class="text-primary font-weight-bold">PRIVILÉGIOS</h4>
+        <p *ngIf="!form.get('perfil').value"
+           class="alert alert-warning">
+            Selecione o perfil antes de determinar os privilégios
+        </p>
+        <table *ngIf="form.get('perfil').value" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Recurso
+                    </th>
+                    <th>
+                        Ações
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let possibilidade of possibilidades">
+                    <td>{{ possibilidade._embedded.recurso.nome }}</td>
+                    <td>
+                        <div class="frame-wrap">
+                            <div *ngFor="let acao of possibilidade.acoes"
+                                 class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox"
+                                       (change)="save(possibilidade.recurso,acao.id)"
+                                       [disabled]="!form.get('perfil').value || saveProgress"
+                                       [checked]="isChecked(possibilidade.recurso,acao.id)"
+                                       class="custom-control-input"
+                                       [attr.id]="'checkAcao_' + possibilidade.recurso + '_' + acao.id">
+                                <label class="custom-control-label"
+                                       [attr.for]="'checkAcao_' + possibilidade.recurso + '_' + acao.id">
+                                    {{ acao.nome }}
+                                </label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

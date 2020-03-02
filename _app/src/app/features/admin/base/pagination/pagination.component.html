@@ -1,0 +1,24 @@
+<div class="dataTables_paginate paging_simple_numbers">
+    <ul class="pagination m-0 p-0">
+        <li [ngClass]="{ 'disabled' : page == 1 }"
+            (click)="prevPage()"
+            class="paginate_button page-item previous">
+            <span class="page-link">
+                <i class="fal fa-chevron-left"></i>
+            </span>
+        </li>
+        <li *ngFor="let i of pages"
+            [ngClass]="{ 'active' : page == i, 'd-none' : i > i + 5 && i < i - 5 }"
+            (click)="changePage(i)"
+            class="paginate_button page-item">
+            <span class="page-link">{{ i }}</span>
+        </li>
+        <li [ngClass]="{ 'disabled' : page == page_count }"
+            (click)="nextPage()"
+            class="paginate_button page-item next">
+            <span class="page-link">
+                <i class="fal fa-chevron-right"></i>
+            </span>
+        </li>
+    </ul>
+</div>

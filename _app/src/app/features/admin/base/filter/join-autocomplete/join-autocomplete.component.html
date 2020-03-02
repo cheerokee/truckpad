@@ -1,0 +1,14 @@
+<input type="hidden" [(ngModel)]="item.value">
+<input [attr.list]="item.name"
+       class="form-control shadow-inset-2"
+       (keyup)="search()"
+       (change)="onChange()"
+       (blur)="(optionSelected == '') ? item.value = '' : optionSelected"
+       [(ngModel)]="optionSelected"
+       placeholder="Pesquisar">
+
+<datalist [attr.id]="item.name">
+    <option *ngFor="let option of list"
+            data-id="{{ option.id }}"
+            value="{{ option.text }}"></option>
+</datalist>

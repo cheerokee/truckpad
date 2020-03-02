@@ -1,0 +1,71 @@
+<div class="subheader">
+    <h1 class="subheader-title">
+        <i class="subheader-icon {{ view.icon }}"></i> {{ view.title }}
+    </h1>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <form (ngSubmit)="save()">
+                <div class="panel-container">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div [formGroup]="form"
+                                 *ngFor="let element of elements" class="form-group col-md-4">
+                                <div *ngIf="element.type != 'hidden' && form?.get(element.name)">
+                                    <label [for]="element.name"
+                                           class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">
+                                        {{ element.label }}:
+                                    </label>
+                                    <base-text *ngIf="element.type == 'text'" [form]="form" [element]="element" (onValue)="form.get(element.name).setValue($event)"></base-text>
+                                    <base-date *ngIf="element.type == 'date'" [form]="form" [element]="element" (onValue)="form.get(element.name).setValue($event)"></base-date>
+                                    <base-moeda *ngIf="element.type == 'moeda'" [form]="form" [element]="element" (onValue)="form.get(element.name).setValue($event)"></base-moeda>
+                                    <base-telefone *ngIf="element.type == 'telefone'" [form]="form" [element]="element" (onValue)="form.get(element.name).setValue($event)"></base-telefone>
+                                    <base-cpf *ngIf="element.type == 'cpf'" [form]="form" [element]="element" (onValue)="form.get(element.name).setValue($event)"></base-cpf>
+                                    <base-number *ngIf="element.type == 'number'" [form]="form" [element]="element" (onValue)="form.get(element.name).setValue($event)"></base-number>
+                                    <base-text-area *ngIf="element.type == 'text-area'" [form]="form" [element]="element" (onValue)="form.get(element.name).setValue($event)"></base-text-area>
+                                    <base-select *ngIf="element.type == 'select'" [form]="form" [element]="element" (onValue)="form.get(element.name).setValue($event)"></base-select>
+                                    <base-join-select *ngIf="element.type == 'join-select'" [form]="form" [element]="element" (onValue)="form.get(element.name).setValue($event)"></base-join-select>
+                                    <base-join-autocomplete *ngIf="element.type == 'join-autocomplete'"
+                                                            [form]="form"
+                                                            [element]="element"
+                                                            (onValue)="form.get(element.name).setValue($event)"
+                                                            (onSearch)="search($event)"></base-join-autocomplete>
+
+                                    <field-error [field]="form.get(element.name)"
+                                                 [label]="element.label"
+                                                 [messages]="[]"></field-error>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-toolbar border-top p-3">
+                    <button type="submit"
+                            id="entrar"
+                            [hidden]="!btnSalvar"
+                            [disabled]="!form?.valid"
+                            title="SALVAR"
+                            class="btn btn-lg btn-primary waves-effect waves-themed">
+                        <i class="fal fa-save"></i>&nbsp;Salvar
+                    </button>
+                    <button class="btn btn-lg btn-danger waves-effect waves-themed"
+                            type="button"
+                            [hidden]="btnSalvar"
+                            disabled="">
+                            <span class="spinner-grow spinner-grow-sm"
+                                  role="status"
+                                  aria-hidden="true"></span>
+                        Aguarde...
+                    </button>
+                    <button type="button"
+                            title="CANCELAR"
+                            (click)="resetGeral()"
+                            class="ml-2 btn btn-lg btn-danger waves-effect waves-themed">
+                        <i class="fal fa-times"></i>&nbsp;Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,221 @@
+<div class="settings-panel" *ngIf="vm$ | async as vm">
+  <div class="mt-4 d-table w-100 px-5">
+    <div class="d-table-cell align-middle">
+      <h5 class="p-0">
+        Layout da Aplicação
+      </h5>
+    </div>
+  </div>
+  <div class="list" id="fh">
+    <smart-on-off [checked]="vm.fixedHeader"
+                  (checkedChange)="configuracaoHttpService.toggleFixedHeader($event,true)">
+    </smart-on-off>
+    <span class="onoffswitch-title">Cabeçalho Fixo</span>
+    <span class="onoffswitch-title-desc" >
+      Cabeçalho estará fixo em todos os momentos
+    </span>
+  </div>
+  <div class="list" id="nff">
+    <smart-on-off [checked]="vm.fixedNavigation"
+                  (checkedChange)="configuracaoHttpService.toggleFixedNavigation($event,true)">
+    </smart-on-off>
+    <span class="onoffswitch-title">Navegação Fixa</span>
+    <span class="onoffswitch-title-desc">Painel esquerdo fica fixo</span>
+  </div>
+  <div class="list" id="nfm">
+    <smart-on-off [checked]="vm.minifyNavigation"
+                  (checkedChange)="configuracaoHttpService.toggleMinifyNavigation($event,true)">
+    </smart-on-off>
+    <span class="onoffswitch-title">Navegação Minificada</span>
+    <span class="onoffswitch-title-desc">Inclinar a navegação para maximizar o espaço</span>
+  </div>
+
+  <div class="list" id="nfh">
+    <smart-on-off [checked]="vm.hideNavigation"
+                  (checkedChange)="configuracaoHttpService.toggleHideNavigation($event,true)">
+    </smart-on-off>
+    <span class="onoffswitch-title">Esconder a Navegação</span>
+    <span class="onoffswitch-title-desc">Role o mouse na borda para revelar</span>
+  </div>
+
+  <div class="list" id="nft">
+    <smart-on-off [checked]="vm.topNavigation"
+                  (checkedChange)="configuracaoHttpService.toggleTopNavigation($event,true)" >
+    </smart-on-off>
+    <span class="onoffswitch-title">Navegação no Topo</span>
+    <span class="onoffswitch-title-desc">Realocar o menu lateral no topo</span>
+  </div>
+
+  <div class="list" id="mmb">
+    <smart-on-off [checked]="vm.boxedLayout"
+                  (checkedChange)="configuracaoHttpService.toggleBoxedLayout($event,true)" >
+    </smart-on-off>
+    <span class="onoffswitch-title">Layout em Caixa</span>
+    <span class="onoffswitch-title-desc">Encapsula em um contêiner</span>
+  </div>
+
+  <div class="mt-4 d-table w-100 px-5">
+    <div class="d-table-cell align-middle">
+      <h5 class="p-0">
+        Menu Dispositivo Móvel
+      </h5>
+    </div>
+  </div>
+
+  <div class="list" id="nmp">
+    <smart-on-off [checked]="vm.pushContent"
+                  (checkedChange)="configuracaoHttpService.togglePushContent($event,true)" >
+    </smart-on-off>
+    <span class="onoffswitch-title">Conteúdo de Envio</span>
+    <span class="onoffswitch-title-desc">O conteúdo enviado no menu revela</span>
+  </div>
+
+  <div class="list" id="nmno">
+    <smart-on-off [checked]="vm.noOverlay"
+                  (checkedChange)="configuracaoHttpService.toggleNoOverlay($event,true)" >
+    </smart-on-off>
+    <span class="onoffswitch-title">Sem Sobreposição</span>
+    <span class="onoffswitch-title-desc">Remove a malha na revelação do menu</span>
+  </div>
+
+  <div class="list" id="sldo">
+    <smart-on-off [checked]="vm.offCanvas"
+                  (checkedChange)="configuracaoHttpService.toggleOffCanvas($event,true)" >
+    </smart-on-off>
+    <span class="onoffswitch-title">Off-Canvas <sup>(beta)</sup></span>
+    <span class="onoffswitch-title-desc">Menu de sobreposições de conteúdo</span>
+  </div>
+
+  <div class="mt-4 d-table w-100 px-5">
+    <div class="d-table-cell align-middle">
+      <h5 class="p-0">
+        Acessibilidade
+      </h5>
+    </div>
+  </div>
+
+  <div class="list" id="mbf">
+    <smart-on-off [checked]="vm.biggerContentFont"
+                  (checkedChange)="configuracaoHttpService.toggleBiggerContentFont($event,true)" >
+    </smart-on-off>
+    <span class="onoffswitch-title">Fonte de Conteúdo Maior</span>
+    <span class="onoffswitch-title-desc" >
+      As fontes de conteúdo são maiores para facilitar a
+    </span>
+  </div>
+  <div class="list" id="mhc">
+    <smart-on-off [checked]="vm.highContrastText"
+                  (checkedChange)="configuracaoHttpService.toggleHighContrastText($event,true)" >
+    </smart-on-off>
+    <span class="onoffswitch-title">Texto de alto contraste (WCAG 2 AA)</span>
+    <span class="onoffswitch-title-desc">4.5:1 relação de contraste do texto</span>
+  </div>
+  <div class="list" id="mcb">
+    <smart-on-off [checked]="vm.daltonism"
+                  (checkedChange)="configuracaoHttpService.toggleDaltonism($event,true)">
+    </smart-on-off>
+    <span class="onoffswitch-title">Daltonismo <sup>(beta)</sup> </span>
+    <span class="onoffswitch-title-desc">Deficiência de visão de cores</span>
+  </div>
+  <div class="list" id="mpc">
+    <smart-on-off [checked]="vm.preloaderInside"
+                  (checkedChange)="configuracaoHttpService.togglePreloaderInsise($event,true)" >
+    </smart-on-off>
+    <span class="onoffswitch-title">Pré-carregamento Dentro</span>
+    <span class="onoffswitch-title-desc">Pré-carregamento estará dentro do conteúdo</span>
+  </div>
+
+  <div class="mt-4 d-table w-100 px-5">
+    <div class="d-table-cell align-middle">
+      <h5 class="p-0">
+        Modificações Globais
+      </h5>
+    </div>
+  </div>
+  <div class="list" id="mcbg">
+    <smart-on-off [checked]="vm.cleanPageBackground"
+                  (checkedChange)="configuracaoHttpService.toggleCleanPageBackground($event,true)" >
+    </smart-on-off>
+    <span class="onoffswitch-title">Limpar fundo da página</span>
+    <span class="onoffswitch-title-desc">Adicionar mais espaço em branco</span>
+  </div>
+  <div class="list" id="mhni">
+    <smart-on-off [checked]="vm.hideNavigationIcons"
+                  (checkedChange)="configuracaoHttpService.toggleHideNavigationIcons($event,true)" >
+    </smart-on-off>
+    <span class="onoffswitch-title">Ocultar ícones de navegação</span>
+    <span class="onoffswitch-title-desc">Ícones de navegação invisível</span>
+  </div>
+  <div class="list" id="dan">
+    <smart-on-off [checked]="vm.disableCSSAnimation"
+                  (checkedChange)="configuracaoHttpService.toggleDisableCSSAnimation($event,true)" >
+    </smart-on-off>
+    <span class="onoffswitch-title">Desabilitar animações CSS</span>
+    <span class="onoffswitch-title-desc">Desativa animações baseadas em CSS</span>
+  </div>
+  <div class="list" id="mhic">
+    <smart-on-off [checked]="vm.hideInfoCard"
+                  (checkedChange)="configuracaoHttpService.toggleHideInfoCard($event,true)" >
+    </smart-on-off>
+    <span class="onoffswitch-title">Ocultar cartão de informações</span>
+    <span class="onoffswitch-title-desc">
+      Oculta o cartão de informações do painel esquerdo
+    </span>
+  </div>
+  <div class="list" id="mlph">
+    <smart-on-off [checked]="vm.leanSubheader"
+                  (checkedChange)="configuracaoHttpService.toggleLeanSubheader($event,true)" >
+    </smart-on-off>
+    <span class="onoffswitch-title">Subtítulo Lean</span>
+    <span class="onoffswitch-title-desc">Cabeçalho de página distinto</span>
+  </div>
+  <div class="list" id="mnl">
+    <smart-on-off [checked]="vm.hierarchicalNavigation"
+                  (checkedChange)="configuracaoHttpService.toggleHierarchicalNavigation($event,true)">
+    </smart-on-off>
+    <span class="onoffswitch-title">Navegação Hierárquica</span>
+    <span class="onoffswitch-title-desc">Divisão clara dos links de navegação</span>
+  </div>
+
+  <div class="list mt-3">
+    <span class="onoffswitch-title" >
+      Tamanho da fonte global <small>(RESETA NA ATUALIZAÇÃO)</small>
+    </span>
+    <div class="btn-group btn-group-sm btn-group-toggle my-2"
+         data-toggle="buttons">
+      <label [class.active]="vm.globalFontSize === 'sm'"
+             class="btn btn-default btn-sm"
+             (click)="configuracaoHttpService.setGlobalFontSize('sm',true)" >
+        <input type="radio" name="changeFrontSize" /> P
+      </label>
+      <label [class.active]="vm.globalFontSize === 'md'"
+             class="btn btn-default btn-sm"
+             (click)="configuracaoHttpService.setGlobalFontSize('md',true)" >
+        <input type="radio" name="changeFrontSize" /> M
+      </label>
+      <label [class.active]="vm.globalFontSize === 'lg'"
+             class="btn btn-default btn-sm"
+             (click)="configuracaoHttpService.setGlobalFontSize('lg',true)" >
+        <input type="radio" name="changeFrontSize" /> G
+      </label>
+      <label [class.active]="vm.globalFontSize === 'xl'"
+             class="btn btn-default btn-sm"
+             (click)="configuracaoHttpService.setGlobalFontSize('xl',true)" >
+        <input type="radio" name="changeFrontSize" /> XG
+      </label>
+    </div>
+    <span class="onoffswitch-title-desc d-block mb-g" >
+      Alterar o tamanho da fonte <strong>raiz</strong> para afetar os valores rem
+    </span >
+  </div>
+  <hr class="m-0">
+	<div class="p-3 d-flex align-items-center justify-content-center bg-faded">
+		<button class="btn btn-outline-danger fw-500 mr-2" (click)="configuracaoHttpService.appReset($event)">
+          Resetar Configurações
+        </button>
+		<button class="btn btn-danger fw-500" (click)="configuracaoHttpService.factoryReset($event)">
+          Restauração de Fábrica
+        </button>
+	</div>
+</div>
+<span id="saving"></span>
