@@ -721,12 +721,12 @@ const NavigationItems = [
         icon: 'fal fa-warehouse',
         routerLink: '/admin'
     },
-    {
-        title: 'Painel de Viagens',
-        tags: 'painel de viagens',
-        icon: 'fal fa-map-signs',
-        routerLink: '/admin/transporte/painel-viagem'
-    },
+    // {
+    //   title: 'Painel de Viagens',
+    //   tags: 'painel de viagens',
+    //   icon: 'fal fa-map-signs',
+    //   routerLink: '/admin/transporte/painel-viagem'
+    // },
     {
         title: 'Cadastros',
         tags: 'cadastros',

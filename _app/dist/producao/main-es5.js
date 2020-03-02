@@ -1385,12 +1385,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       tags: 'dashboard',
       icon: 'fal fa-warehouse',
       routerLink: '/admin'
-    }, {
-      title: 'Painel de Viagens',
-      tags: 'painel de viagens',
-      icon: 'fal fa-map-signs',
-      routerLink: '/admin/transporte/painel-viagem'
-    }, {
+    }, // {
+    //   title: 'Painel de Viagens',
+    //   tags: 'painel de viagens',
+    //   icon: 'fal fa-map-signs',
+    //   routerLink: '/admin/transporte/painel-viagem'
+    // },
+    {
       title: 'Cadastros',
       tags: 'cadastros',
       icon: 'fal fa-database',
